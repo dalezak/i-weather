@@ -35,5 +35,47 @@ module IWeather
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.x.units = {
+      metric: {
+        label: "Celsius °C",
+        unit: "metric",
+        temperature: "°C",
+        wind: "km/h",
+        pressure: "mb",
+        humidity: "%",
+        visibility: "km",
+        precipitation: "mm",
+        uv_index: "UV",
+        dew_point: "°C",
+        feels_like: "°C",
+        wind_degree: "°",
+        wind_speed: "km/h",
+        wind_direction: "°",
+        gust_speed: "km/h",
+        cloud_cover: "%",
+        heat_index: "°C"
+      },
+      imperial: {
+        label: "Fahrenheit °F",
+        unit: "imperial",
+        temperature: "°F",
+        wind: "mph",
+        pressure: "in",
+        humidity: "%",
+        visibility: "mi",
+        precipitation: "in",
+        uv_index: "UV",
+        dew_point: "°F",
+        feels_like: "°F",
+        wind_degree: "°",
+        wind_speed: "mph",
+        wind_direction: "°",
+        gust_speed: "mph",
+        cloud_cover: "%",
+        heat_index: "°F"
+      }
+    }
+    config.x.default_units = :metric
   end
 end

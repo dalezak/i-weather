@@ -1,9 +1,8 @@
 class PagesController < ApplicationController
-  include ApplicationHelper
-
+  
   def index
     if params[:location].present?
-      @forecast = WeatherApiService.call(params[:location], metric?)
+      @forecast = WeatherApiService.call(params[:location], current_unit)
     end
   end
 

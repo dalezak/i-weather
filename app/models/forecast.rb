@@ -24,9 +24,6 @@ class Forecast
   attribute :updated_at, :datetime
   attribute :cached_at, :datetime
 
-  attribute :query, :string
-  attribute :metric, :boolean, default: true
-
   attribute :location_name, :string
   attribute :location_region, :string
   attribute :location_country, :string

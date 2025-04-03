@@ -1,20 +1,23 @@
 module ApplicationHelper
 
-  UNITS = [
-    METRIC = "metric".freeze,
-    IMPERIAL = "imperial".freeze
-  ].freeze
-
   def unit
-    cookies[:unit] || METRIC
+    cookies[:unit] || Rails.configuration.x.default_units
   end
 
   def metric?
-    unit == METRIC
+    unit == Rails.configuration.x.units[:metric][:unit]
+  end
+
+  def metric_label
+    Rails.configuration.x.units[:metric][:label]
   end
   
   def imperial?
-    unit == IMPERIAL
+    unit == Rails.configuration.x.units[:imperial][:unit]
+  end
+
+  def imperial_label
+    Rails.configuration.x.units[:imperial][:label]
   end
 
   def flash_class(level)

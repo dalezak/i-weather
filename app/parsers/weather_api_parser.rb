@@ -1,29 +1,16 @@
 class WeatherApiParser < ApplicationParser
 
-  DEGREES = "°".freeze
-  CELSIUS = "°C".freeze
-  FAHRENHEIT = "°F".freeze
-  KILOMETERS = "km".freeze
-  KILOMETERS_PER_HOUR = "kph".freeze
-  MILES = "mi".freeze
-  MILES_PER_HOUR = "mph".freeze
-  PERCENTAGE = "%".freeze
-  INCHES = "in".freeze
-  MILLIMETERS = "mm".freeze
-  MILLIBARS = "mb".freeze
+  attr_reader :response, :unit
 
-  attr_reader :response, :metric
-
-  def initialize(response, metric)
+  def initialize(response, unit)
     @response = response
-    @metric = metric
+    @unit = unit.to_sym
   end
 
   def parse
     Forecast.new(
       updated_at: updated_at,
       cached_at: cached_at,
-      metric: metric?,
       location_name: location_name,
       location_region: location_region,
       location_country: location_country,
@@ -52,6 +39,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def cached_at
+    # TODO implement caching logic
     nil
   end
 
@@ -76,47 +64,27 @@ class WeatherApiParser < ApplicationParser
   end
 
   def temperature
-    if metric?
-      response.dig(:current, :temp_c).to_s + CELSIUS
-    else
-      response.dig(:current, :temp_f).to_s + FAHRENHEIT
-    end
+    response.dig(:current, metric? ? :temp_c : :temp_f).to_s + symbol_for_field(:temperature)
   end
 
   def feels_like
-    if metric?
-      response.dig(:current, :feelslike_c).to_s + CELSIUS
-    else
-      response.dig(:current, :feelslike_f).to_s + FAHRENHEIT
-    end
+    response.dig(:current, metric? ? :feelslike_c : :feelslike_f).to_s + symbol_for_field(:feels_like)
   end
 
   def wind_speed
-    if metric?
-      response.dig(:current, :wind_kph).to_s + KILOMETERS_PER_HOUR
-    else
-      response.dig(:current, :wind_mph).to_s + MILES_PER_HOUR
-    end
+    response.dig(:current, metric? ? :wind_kph : :wind_mph).to_s + symbol_for_field(:wind)
   end
 
   def wind_direction
-    response.dig(:current, :wind_degree).to_s + DEGREES
+    response.dig(:current, :wind_degree).to_s + symbol_for_field(:wind_degree)
   end
 
   def pressure
-    if metric?
-      response.dig(:current, :pressure_mb).to_s + MILLIBARS
-    else
-      response.dig(:current, :pressure_in).to_s + INCHES
-    end
+    response.dig(:current, metric? ? :pressure_mb : :pressure_in).to_s + symbol_for_field(:pressure)
   end
 
   def visibility
-    if metric?
-      response.dig(:current, :vis_km).to_s + KILOMETERS
-    else
-      response.dig(:current, :vis_miles).to_s + MILES
-    end
+    response.dig(:current, metric? ? :vis_km : :vis_miles).to_s + symbol_for_field(:visibility)
   end
 
   def uv_index
@@ -124,47 +92,35 @@ class WeatherApiParser < ApplicationParser
   end
 
   def heat_index
-    if metric?
-      response.dig(:current, :heatindex_c).to_s + CELSIUS
-    else
-      response.dig(:current, :heatindex_f).to_s + FAHRENHEIT
-    end
+    response.dig(:current, metric? ? :heatindex_c : :heatindex_f).to_s + symbol_for_field(:heat_index)
   end
 
   def dew_point
-    if metric?
-      response.dig(:current, :dewpoint_c).to_s + CELSIUS
-    else
-      response.dig(:current, :dewpoint_f).to_s + FAHRENHEIT
-    end
+    response.dig(:current, metric? ? :dewpoint_c : :dewpoint_f).to_s + symbol_for_field(:dew_point)
   end
 
   def cloud_cover
-    response.dig(:current, :cloud).to_s + PERCENTAGE
+    response.dig(:current, :cloud).to_s + Rails.configuration.x.units[unit][:cloud_cover]
   end
 
   def gust_speed
-    if metric?
-      response.dig(:current, :gust_kph).to_s + KILOMETERS_PER_HOUR
-    else
-      response.dig(:current, :gust_mph).to_s + MILES_PER_HOUR
-    end
+    response.dig(:current, metric? ? :gust_kph : :gust_mph).to_s + symbol_for_field(:gust_speed)
   end
 
   def humidity
-    response.dig(:current, :humidity).to_s + PERCENTAGE
+    response.dig(:current, :humidity).to_s + symbol_for_field(:humidity)
   end
 
   def precipitation
-    if metric?
-      response.dig(:current, :precip_mm).to_s + MILLIMETERS
-    else
-      response.dig(:current, :precip_in).to_s + INCHES
-    end
+    response.dig(:current, metric? ? :precip_mm : :precip_in).to_s + symbol_for_field(:precipitation)
   end
 
   def metric?
-    @metric
+    unit == "metric"
+  end
+
+  def symbol_for_field(field)
+    Rails.configuration.x.units[unit][field]
   end
   
 end

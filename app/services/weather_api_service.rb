@@ -3,15 +3,15 @@ class WeatherApiService < ApplicationService
   base_uri 'api.weatherapi.com/v1'
   format :json
 
-  def initialize(query, metric = true)
+  def initialize(query, unit)
     @options = { query: { key: key, aqi: "no", q: query } }
-    @metric = metric
+    @unit = unit
   end
 
   def call
     response = self.class.get("/v1/current.json", @options)
     if response.success?
-      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @metric)
+      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
     else
       nil
     end
