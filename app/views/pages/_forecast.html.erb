@@ -1,26 +1,11 @@
 <% if forecast.valid? %>
 <div class="row">
-  <% Forecast::FIELDS.map do |label, field| %>
-  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="card mb-4">
-      <div class="card-header">
-        <h6><%= label %></h6>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          <% if label == 'Updated' || label == 'Cached' %>
-          <%= time_ago(forecast.send(field)) || "n/a" %>
-          <% else %>
-          <%= forecast.send(field) || "n/a" %>
-          <% end %>
-        </p>
-      </div>
-    </div>
-  </div>
+  <% Forecast::FIELDS.each do |label, field| %>
+  <%= render 'pages/forecast_field', label: label, value: forecast.public_send(field) %>
   <% end %>
 </div>
 <% else %>
 <div class="alert alert-warning" role="alert">
-  There was a problem loading forecast data for that location, please try again.
+  There was a problem loading the forecast for that location, please try again.
 </div>
 <% end %>
