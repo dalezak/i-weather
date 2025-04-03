@@ -39,8 +39,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def cached_at
-    # TODO implement caching logic
-    nil
+    Time.current
   end
 
   def location_name
@@ -100,7 +99,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def cloud_cover
-    response.dig(:current, :cloud).to_s + Rails.configuration.x.units[unit][:cloud_cover]
+    response.dig(:current, :cloud).to_s + symbol_for_field(:cloud_cover)
   end
 
   def gust_speed

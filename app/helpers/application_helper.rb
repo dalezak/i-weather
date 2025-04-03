@@ -37,4 +37,10 @@ module ApplicationHelper
     "active" if params[:action] == path
   end
 
+  def time_ago(time)
+    return if time.nil?
+    return if time.blank?
+    time_ago_in_words(time) + " ago"
+  end
+
 end

@@ -8,7 +8,11 @@
       </div>
       <div class="card-body">
         <p class="card-text">
+          <% if label == 'Updated' || label == 'Cached' %>
+          <%= time_ago(forecast.send(field)) || "n/a" %>
+          <% else %>
           <%= forecast.send(field) || "n/a" %>
+          <% end %>
         </p>
       </div>
     </div>

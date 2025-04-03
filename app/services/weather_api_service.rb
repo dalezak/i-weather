@@ -4,19 +4,26 @@ class WeatherApiService < ApplicationService
   format :json
 
   def initialize(query, unit)
-    @options = { query: { key: key, aqi: "no", q: query } }
+    @query = query
     @unit = unit
+    @options = { query: { key: key, aqi: "no", q: query } }
   end
 
   def call
-    response = self.class.get("/v1/current.json", @options)
-    WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
+    Rails.cache.fetch(cache_key, expires_in: 1.minutes) do
+      response = self.class.get("/v1/current.json", @options)
+      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
+    end
   end
 
   private
 
   def key
     Rails.application.credentials.weather_api_key
+  end
+
+  def cache_key
+    ["weather_api", @unit, @query.parameterize].join("/")
   end
 
 end
