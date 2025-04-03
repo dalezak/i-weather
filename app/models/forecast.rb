@@ -51,4 +51,6 @@ class Forecast
   attribute :humidity, :string
   attribute :precipitation, :string
 
+  validates :updated_at, presence: true
+
 end

@@ -10,11 +10,7 @@ class WeatherApiService < ApplicationService
 
   def call
     response = self.class.get("/v1/current.json", @options)
-    if response.success?
-      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
-    else
-      nil
-    end
+    WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
   end
 
   private
