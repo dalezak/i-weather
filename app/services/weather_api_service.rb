@@ -3,7 +3,7 @@ class WeatherApiService < ApplicationService
   base_uri 'api.weatherapi.com/v1'
   format :json
 
-  def initialize(query, metric: true)
+  def initialize(query, metric = true)
     @options = { query: { key: key, aqi: "no", q: query } }
     @metric = metric
   end

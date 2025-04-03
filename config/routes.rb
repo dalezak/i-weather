@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  
   get "/", to: "pages#index", as: :home
   get "about", to: "pages#about", as: :about
+
+  post "metric", to: "pages#metric", as: :metric
+  post "imperial", to: "pages#imperial", as: :imperial
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
