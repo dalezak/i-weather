@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+# This class represents a weather forecast
 class Forecast
   include ActiveModel::Model
   include ActiveModel::Attributes
