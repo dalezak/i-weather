@@ -25,7 +25,7 @@ rails routes
 
 Rails Tests
 ```shell
-rails test test:system
+rails test
 ```
 
 Edit Credentials

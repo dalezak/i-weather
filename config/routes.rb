@@ -30,4 +30,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "forecasts#index"
+
+  get "*path", to: redirect('/')
 end
