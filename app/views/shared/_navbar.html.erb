@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "About", about_path, class: "nav-link #{active_for_path('about')}" %>
+          <%= link_to "About", about_pages_path, class: "nav-link #{active_for_path('about')}" %>
         </li>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0 ml-auto">
@@ -17,10 +17,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <%= button_to metric_label, metric_path, method: :post, class: "dropdown-item #{'active' if metric?}" %>
+              <%= button_to metric_label, metric_units_path, method: :post, class: "dropdown-item #{'active' if metric?}" %>
             </li>
             <li>
-              <%= button_to imperial_label, imperial_path, method: :post, class: "dropdown-item #{'active' if imperial?}" %>
+              <%= button_to imperial_label, imperial_units_path, method: :post, class: "dropdown-item #{'active' if imperial?}" %>
             </li>
           </ul>
         </li>

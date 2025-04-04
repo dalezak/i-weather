@@ -18,6 +18,11 @@ Rails Server
 rails server
 ```
 
+Rails Routes
+```shell
+rails routes
+```
+
 Edit Credentials
 ```shell
 EDITOR="code --wait" rails credentials:edit

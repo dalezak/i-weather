@@ -21,7 +21,7 @@ export default class extends Controller {
   handleSuccess(position) {
     this.latitudeTarget.value = position.coords.latitude;
     this.longitudeTarget.value = position.coords.longitude;
-    this.formTarget.submit();
+    this.formTarget.requestSubmit();
   }
 
   handleError(error) {

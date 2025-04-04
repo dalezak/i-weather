@@ -1,11 +1,15 @@
-<% if forecast.valid? %>
+<% forecast ||= @forecast %>
+<%= turbo_frame_tag 'forecast_results' do %>
+<% if forecast.blank? %>
+<% elsif forecast.valid? %>
 <div class="row">
   <% Forecast::FIELDS.each do |label, field| %>
-  <%= render 'pages/forecast_field', label: label, value: forecast.public_send(field) %>
+  <%= render 'forecasts/field', label: label, value: forecast.public_send(field) %>
   <% end %>
 </div>
 <% else %>
 <div class="alert alert-warning" role="alert">
   There was a problem loading the forecast for that location, please try again.
 </div>
+<% end %>
 <% end %>

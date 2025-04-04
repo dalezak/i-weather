@@ -1,9 +1,23 @@
 Rails.application.routes.draw do  
-  get "/", to: "pages#index", as: :home
-  get "about", to: "pages#about", as: :about
+  resources :pages, only: [] do
+    collection do
+      get :index
+      get :about
+    end
+  end
 
-  post "metric", to: "units#metric", as: :metric
-  post "imperial", to: "units#imperial", as: :imperial
+  resources :units, only: [] do
+    collection do
+      post :metric
+      post :imperial
+    end
+  end
+
+  resources :forecasts, only: [:index] do
+    collection do
+      post :lookup
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

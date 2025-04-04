@@ -1,0 +1,21 @@
+<% location ||= @location %>
+<div class="p-5 mb-4 bg-body-tertiary rounded-3" data-controller="geocode">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">What's the weather outside?</h1>
+    <p class="col-md-8 fs-4">Hmm, wonder if I'll need an umbrella or sunscreen today...</p>
+    <%= form_tag lookup_forecasts_path, class: "mb-3", data: { geocode_target: "form", turbo_frame: 'forecast_results' } do %>
+    <%= hidden_field_tag :latitude, "", data: { geocode_target: "latitude" } %>
+    <%= hidden_field_tag :longitude, "", data: { geocode_target: "longitude" } %>
+    <div class="input-group">
+      <%= text_field_tag :location, location, class: "form-control form-control-lg", placeholder: "Enter your city or postal code", data: { geocode_target: "address" } %>
+      <button class="btn btn-outline-primary" type="button" id="button-locate" title="Locate me" data-action="click->geocode#locate">
+        <i class="bi bi-geo-alt"></i>
+      </button>
+      <button class="btn btn-outline-primary" type="submit" id="button-search" title="Search">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+    <% end %>
+    <p class="text-danger" data-geocode-target="error"></p>
+  </div>
+</div>
