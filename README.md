@@ -53,6 +53,11 @@ Rails Tests
 rails test
 ```
 
+Rubocop Warnings
+```shell
+rubocop
+```
+
 Edit Credentials
 ```shell
 EDITOR="code --wait" rails credentials:edit
