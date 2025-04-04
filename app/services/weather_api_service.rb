@@ -12,7 +12,7 @@ class WeatherApiService < ApplicationService
   def initialize(query, units)
     @query = query
     @units = units
-    @options = { query: { key: key, aqi: "no", q: query } }
+    @options = { query: { key: api_key, aqi: "no", q: query } }
   end
 
   def call
@@ -20,7 +20,7 @@ class WeatherApiService < ApplicationService
     return nil if units.blank?
     return nil unless %w[metric imperial].include?(units)
 
-    Rails.cache.fetch(cache_key, expires_in: 1.minutes) do
+    Rails.cache.fetch(cache_key, expires_in: expires_in) do
       response = self.class.get("/v1/current.json", options)
       WeatherApiParser.parse(response.parsed_response.with_indifferent_access, units)
     end
@@ -28,8 +28,12 @@ class WeatherApiService < ApplicationService
 
   private
 
-  def key
+  def api_key
     Rails.application.credentials.weather_api_key
+  end
+
+  def expires_in
+    Rails.application.config.x.cache_expires_in || 30.minutes
   end
 
   def cache_key
