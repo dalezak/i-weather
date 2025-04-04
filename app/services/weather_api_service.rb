@@ -12,10 +12,11 @@ class WeatherApiService < ApplicationService
   # @param [String] query
   # @param [String] units
   # @return [Forecast]
-  def initialize(query, units)
+  def initialize(query, units, days = 4)
     @query = query
     @units = units
-    @options = { query: { key: api_key, aqi: "no", q: query } }
+    @days = days
+    @options = { query: { key: api_key, aqi: "no", q: query, days: days } }
   end
 
   # Fetch weather data from the API
@@ -37,7 +38,7 @@ class WeatherApiService < ApplicationService
     return nil unless %w[metric imperial].include?(units)
 
     Rails.cache.fetch(cache_key, expires_in: expires_in) do
-      response = self.class.get("/v1/current.json", options)
+      response = self.class.get("/v1/forecast.json", options)
       WeatherApiParser.parse(response.parsed_response.with_indifferent_access, units)
     end
   end

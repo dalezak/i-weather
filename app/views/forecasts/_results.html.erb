@@ -9,6 +9,9 @@
   <% Forecast::FIELDS.each do |label, field| %>
   <%= render 'forecasts/field', label: label, value: forecast.public_send(field) %>
   <% end %>
+  <% forecast.days.each do |day| %>
+  <%= render 'forecasts/day', day: day %>
+  <% end %>
 </div>
 <% else %>
 <div class="alert alert-warning" role="alert">

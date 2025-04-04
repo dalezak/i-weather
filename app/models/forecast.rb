@@ -54,5 +54,7 @@ class Forecast
   attribute :humidity, :string
   attribute :precipitation, :string
 
+  attribute :days, array: true, default: []
+
   validates :updated_at, presence: true
 end

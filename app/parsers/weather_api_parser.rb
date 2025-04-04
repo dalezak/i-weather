@@ -37,7 +37,8 @@ class WeatherApiParser < ApplicationParser
       cloud_cover: cloud_cover,
       gust_speed: gust_speed,
       humidity: humidity,
-      precipitation: precipitation
+      precipitation: precipitation,
+      days: days
     )
   end
 
@@ -121,6 +122,18 @@ class WeatherApiParser < ApplicationParser
 
   def precipitation
     response.dig(:current, metric? ? :precip_mm : :precip_in).to_s + symbol_for_field(:precipitation)
+  end
+
+  def days
+    response.dig(:forecast, :forecastday).map do |day|
+      {
+        date: day.dig(:date),
+        max_temp: day.dig(:day, metric? ? :maxtemp_c : :maxtemp_f).to_s + symbol_for_field(:temperature),
+        min_temp: day.dig(:day, metric? ? :mintemp_c : :mintemp_f).to_s + symbol_for_field(:temperature),
+        condition: day.dig(:day, :condition, :text),
+        icon: day.dig(:day, :condition, :icon)
+      }
+    end
   end
 
   def metric?

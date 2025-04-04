@@ -65,4 +65,31 @@ module ApplicationHelper
       value
     end
   end
+
+  # Returns the formatted date string
+  # @param date [Date, Time] the date to format
+  # @return [String] the formatted date string
+  # @note If the date is blank, returns nil. The format is 'Day, Month Day' with a suffix for the day.
+  def date_formatted(date)
+    return if date.blank?
+    date = date.to_date
+    date.strftime("%A, %B %-d") + day_suffix(date.day)
+  end
+
+  # Returns the appropriate suffix for the day of the month
+  # @param day [Integer] the day of the month
+  # @return [String] the suffix for the day of the month
+  # @note The suffixes are 'st', 'nd', 'rd', and 'th' based on the day of the month.
+  def day_suffix(day)
+    case day
+    when 1, 21, 31
+      "st"
+    when 2, 22
+      "nd"
+    when 3, 23
+      "rd"
+    else
+      "th"
+    end
+  end
 end

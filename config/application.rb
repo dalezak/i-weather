@@ -36,7 +36,7 @@ module IWeather
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.x.cache_expires_in = 30.minutes
+    config.x.cache_expires_in = Rails.env.production? ? 30.minutes : 1.minute
     config.x.units = {
       metric: {
         name: "metric",
