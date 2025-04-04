@@ -1,5 +1,4 @@
 class UnitsController < ApplicationController
-  include ApplicationHelper
   
   def metric
     set_metric

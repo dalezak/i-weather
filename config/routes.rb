@@ -1,7 +1,6 @@
 Rails.application.routes.draw do  
-  resources :pages, only: [] do
+  resources :pages, only: [], path: '' do
     collection do
-      get :index
       get :about
     end
   end
@@ -30,5 +29,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "pages#index"
+  root "forecasts#index"
 end
