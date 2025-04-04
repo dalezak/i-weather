@@ -2,7 +2,7 @@ module ApplicationHelper
   # The user's current units preference for displaying weather data.
   # @note This method checks the cookies for the user's unit preference.
   def units
-    cookies[:units] || Rails.configuration.x.default_units
+    cookies[:units] || Rails.configuration.x.default_units.to_s
   end
 
   # Is the current unit metric?

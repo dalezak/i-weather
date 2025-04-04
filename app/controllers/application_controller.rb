@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # @see Rails.configuration.x.default_units
   # @see Rails.configuration.x.units
   def current_units
-    @current_units ||= cookies[:units] || Rails.configuration.x.default_units
+    @current_units ||= cookies[:units] || Rails.configuration.x.default_units.to_s
   end
 
   # Is the current units metric?
