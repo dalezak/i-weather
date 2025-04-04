@@ -1,13 +1,15 @@
 require "test_helper"
 
 class UnitsControllerTest < ActionDispatch::IntegrationTest
-  test "should get metric" do
-    get units_metric_url
-    assert_response :success
+  test "should set metric" do
+    post metric_units_url
+    assert_equal cookies[:units], "metric"
+    assert_response :redirect
   end
 
-  test "should get imperial" do
-    get units_imperial_url
-    assert_response :success
+  test "should set imperial" do
+    post imperial_units_url
+    assert_equal cookies[:units], "imperial"
+    assert_response :redirect
   end
 end

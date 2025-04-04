@@ -26,7 +26,7 @@ class ForecastsController < ApplicationController
 
   def load_forecast
     if @location.present?
-      @forecast = WeatherApiService.call(@location, current_unit)
+      @forecast = WeatherApiService.call(@location, current_units)
     else
       @forecast = nil
     end

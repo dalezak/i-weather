@@ -38,8 +38,8 @@ module IWeather
 
     config.x.units = {
       metric: {
+        name: "metric",
         label: "Celsius °C",
-        unit: "metric",
         temperature: "°C",
         wind: "km/h",
         pressure: "mb",
@@ -57,8 +57,8 @@ module IWeather
         heat_index: "°C"
       },
       imperial: {
+        name: "imperial",  
         label: "Fahrenheit °F",
-        unit: "imperial",
         temperature: "°F",
         wind: "mph",
         pressure: "in",

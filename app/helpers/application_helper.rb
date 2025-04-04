@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-  def unit
-    cookies[:unit] || Rails.configuration.x.default_units
+  def units
+    cookies[:units] || Rails.configuration.x.default_units
   end
 
   def metric?
-    unit == Rails.configuration.x.units[:metric][:unit]
+    units == Rails.configuration.x.units[:metric][:name]
   end
 
   def metric_label
@@ -13,7 +13,7 @@ module ApplicationHelper
   end
   
   def imperial?
-    unit == Rails.configuration.x.units[:imperial][:unit]
+    units == Rails.configuration.x.units[:imperial][:name]
   end
 
   def imperial_label

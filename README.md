@@ -23,6 +23,11 @@ Rails Routes
 rails routes
 ```
 
+Rails Tests
+```shell
+rails test test:system
+```
+
 Edit Credentials
 ```shell
 EDITOR="code --wait" rails credentials:edit
