@@ -4,6 +4,7 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
   test "should get forecasts index" do
     get forecasts_url
     assert_response :success
+    assert_select "#forecast_results", "Loading..."
   end
 
   test "should post lookup for location" do
