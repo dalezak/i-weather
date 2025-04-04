@@ -1,3 +1,17 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <h1 class="card-title">About</h1>
+    <% @description.each do |desc| %>
+    <p class="card-text">
+      <%= desc %>
+    </p>
+    <% end %>
+    <p class="card-text">
+      You can view the source code for the project at <%= link_to @website, @website, target: '_blank' %>.
+    </p>
+  </div>
+</div>
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   <% @features.each do |title, description| %>
   <%= render 'pages/feature', title: title, description: description %>
