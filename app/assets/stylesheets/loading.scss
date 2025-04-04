@@ -1,0 +1,10 @@
+#forecast_results {
+  #loading {
+    display: none !important
+  }
+}
+#forecast_results[busy] {
+  #loading {
+    display: block !important
+  }
+}

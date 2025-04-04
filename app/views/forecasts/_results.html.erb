@@ -1,6 +1,9 @@
 <% forecast ||= @forecast %>
 <%= turbo_frame_tag 'forecast_results' do %>
 <% if forecast.blank? %>
+<div id="loading" class="text-center text-muted my-5 d-none">
+  <%= image_tag "spinner.svg" %> Loading...
+</div>
 <% elsif forecast.valid? %>
 <div class="row">
   <% Forecast::FIELDS.each do |label, field| %>
