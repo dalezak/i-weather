@@ -70,7 +70,7 @@ module ApplicationHelper
   # @param date [Date, Time] the date to format
   # @return [String] the formatted date string
   # @note If the date is blank, returns nil. The format is 'Day, Month Day' with a suffix for the day.
-  def date_formatted(date)
+  def format_date(date)
     return if date.blank?
     date = date.to_date
     date.strftime("%A, %B %-d") + day_suffix(date.day)
