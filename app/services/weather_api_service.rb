@@ -3,6 +3,12 @@ class WeatherApiService < ApplicationService
   base_uri 'api.weatherapi.com/v1'
   format :json
 
+  attr_accessor :query, :unit, :options
+
+  # Initialize with query and unit
+  # @param [String] query
+  # @param [String] unit
+  # @return [Forecast]
   def initialize(query, unit)
     @query = query
     @unit = unit
@@ -11,8 +17,8 @@ class WeatherApiService < ApplicationService
 
   def call
     Rails.cache.fetch(cache_key, expires_in: 1.minutes) do
-      response = self.class.get("/v1/current.json", @options)
-      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, @unit)
+      response = self.class.get("/v1/current.json", options)
+      WeatherApiParser.parse(response.parsed_response.with_indifferent_access, unit)
     end
   end
 
@@ -23,7 +29,7 @@ class WeatherApiService < ApplicationService
   end
 
   def cache_key
-    ["weather_api", @unit, @query.parameterize].join("/")
+    ["weather_api", unit, query.parameterize].join("/")
   end
 
 end

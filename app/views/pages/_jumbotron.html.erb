@@ -1,17 +1,20 @@
-<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+<div class="p-5 mb-4 bg-body-tertiary rounded-3" data-controller="geocode">
   <div class="container-fluid py-5">
     <h1 class="display-5 fw-bold">What's the weather outside?</h1>
     <p class="col-md-8 fs-4">Hmm, wonder if I'll need an umbrella or sunscreen today...</p>
     <div class="input-group mb-3">
-      <%= form_tag home_path, method: :get, id: "location-form", class: "input-group" do %>
-      <%= text_field_tag :location, params[:location], class: "form-control form-control-lg", placeholder: "Enter your city or postal code", aria: { label: "Enter your city or postal code" } %>
-      <button class="btn btn-outline-primary" type="button" id="button-locate" title="Locate me">
+      <%= form_tag home_path, method: :get, id: "location-form", class: "input-group", data: { geocode_target: "form" } do %>
+      <%= hidden_field_tag :latitude, "", data: { geocode_target: "latitude"} %>
+      <%= hidden_field_tag :longitude, "", data: { geocode_target: "longitude"} %>
+      <%= text_field_tag :location, params[:location], class: "form-control form-control-lg", placeholder: "Enter your city or postal code", aria: { label: "Enter your city or postal code" }, data: { geocode_target: "address" } %>
+      <button class="btn btn-outline-primary" type="button" id="button-locate" title="Locate me" data-action="click->geocode#locate">
         <i class="bi bi-geo-alt"></i>
       </button>
-      <button class="btn btn-outline-primary" type="submit" id="button-search" title="Search">
+      <button class="btn btn-outline-primary" type="submit" id="button-search" title="Search" data-geocode-target="search">
         <i class="bi bi-search"></i>
       </button>
       <% end %>
     </div>
+    <p class="text-danger" data-geocode-target="error"></p>
   </div>
 </div>

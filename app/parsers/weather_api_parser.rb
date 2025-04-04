@@ -2,6 +2,10 @@ class WeatherApiParser < ApplicationParser
 
   attr_reader :response, :unit
 
+  # Initialize with response and unit
+  # @param [Hash] response
+  # @param [String] unit
+  # @return [Forecast]
   def initialize(response, unit)
     @response = response
     @unit = unit.to_sym
@@ -115,7 +119,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def metric?
-    unit == "metric"
+    unit == Rails.configuration.x.units[:metric][:unit]
   end
 
   def symbol_for_field(field)
