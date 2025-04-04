@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   def metric?
     current_units == Rails.configuration.x.units[:metric][:name]
   end
-  
+
   # Is the current units imperial?
   # @return [Boolean] true if the current units are imperial, false otherwise.
   # @see Rails.configuration.x.units
@@ -59,5 +59,4 @@ class ApplicationController < ActionController::Base
   def set_units_imperial
     set_units(Rails.configuration.x.units[:imperial][:name])
   end
-
 end

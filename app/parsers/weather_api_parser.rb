@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 # This class is responsible for parsing the response from the Weather API
 class WeatherApiParser < ApplicationParser
-
   attr_reader :response, :units, :metric
 
   # Initialize with response and units
@@ -42,7 +42,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   private
-  
+
   def updated_at
     response.dig(:current, :last_updated)
   end
@@ -130,5 +130,4 @@ class WeatherApiParser < ApplicationParser
   def symbol_for_field(field)
     Rails.configuration.x.units[units][field]
   end
-  
 end

@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   # The user's current units preference for displaying weather data.
   # @note This method checks the cookies for the user's unit preference.
   def units
@@ -17,7 +16,7 @@ module ApplicationHelper
   def metric_label
     Rails.configuration.x.units[:metric][:label]
   end
-  
+
   # Is the current unit imperial?
   # @return [Boolean] true if the current unit is imperial, false otherwise
   def imperial?
@@ -35,11 +34,11 @@ module ApplicationHelper
   def flash_class(level)
     case level.to_sym
     when :notice
-      return "info"
+      "info"
     when :alert
-      return "danger"
+      "danger"
     when :success
-      return "success"
+      "success"
     else
       "secondary"
     end
@@ -60,11 +59,10 @@ module ApplicationHelper
   def field_value(label, value)
     if value.blank?
       "n/a"
-    elsif ['Updated', 'Cached'].include?(label)
+    elsif [ "Updated", "Cached" ].include?(label)
       time_ago_in_words(value) + " ago"
     else
       value
     end
   end
-
 end

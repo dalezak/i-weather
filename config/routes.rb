@@ -1,5 +1,5 @@
-Rails.application.routes.draw do  
-  resources :pages, only: [], path: '' do
+Rails.application.routes.draw do
+  resources :pages, only: [], path: "" do
     collection do
       get :about
     end
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :forecasts, only: [:index] do
+  resources :forecasts, only: [ :index ] do
     collection do
       post :lookup
     end
@@ -31,5 +31,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "forecasts#index"
 
-  get "*path", to: redirect('/')
+  get "*path", to: redirect("/")
 end

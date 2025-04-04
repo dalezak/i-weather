@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This class represents a weather forecast
 class Forecast
   include ActiveModel::Model
@@ -35,7 +36,7 @@ class Forecast
 
   attribute :temperature, :string
   attribute :feels_like, :string
-  
+
   attribute :wind_speed, :string
   attribute :wind_direction, :string
 
@@ -54,5 +55,4 @@ class Forecast
   attribute :precipitation, :string
 
   validates :updated_at, presence: true
-
 end

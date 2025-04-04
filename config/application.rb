@@ -58,7 +58,7 @@ module IWeather
         heat_index: "°C"
       },
       imperial: {
-        name: "imperial",  
+        name: "imperial",
         label: "Fahrenheit °F",
         temperature: "°F",
         wind: "mph",

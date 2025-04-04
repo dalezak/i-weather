@@ -6,7 +6,7 @@ class ForecastTest < ActiveSupport::TestCase
     assert_not forecast.valid?
   end
 
-  test 'valid? is true' do
+  test "valid? is true" do
     forecast = Forecast.new(updated_at: Time.now)
     assert forecast.valid?
   end

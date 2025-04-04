@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This class is responsible for fetching city and state information based on latitude and longitude
 class GeocoderService < ApplicationService
   attr_reader :latitude, :longitude
@@ -26,12 +27,11 @@ class GeocoderService < ApplicationService
     return nil if latitude.nil?
     return nil if longitude.nil?
 
-    geocode = Geocoder.search([latitude, longitude]).first
+    geocode = Geocoder.search([ latitude, longitude ]).first
     if geocode.present? && geocode.city.present? && geocode.state.present?
-      [geocode.city, geocode.state].join(", ")
+      [ geocode.city, geocode.state ].join(", ")
     else
       nil
     end
   end
-
 end

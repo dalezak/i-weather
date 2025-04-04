@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-
   # This controller handles static pages and the about page.
   # It provides methods to render the home page and the about page.
   # @note The home page displays the weather forecast, while the about page provides information about the application.
@@ -20,8 +19,7 @@ class PagesController < ApplicationController
       "Routes" => "Routes defined using resources convention.",
       "Tests" => "Controller, model, and system tests in Minitest.",
       "Source Code" => "Source code available on GitHub.",
-      "MIT License" => "Open source under the MIT license.",
+      "MIT License" => "Open source under the MIT license."
     }
   end
-
 end

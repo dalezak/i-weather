@@ -1,6 +1,6 @@
 class ForecastsController < ApplicationController
-  before_action :set_location, only: [:index, :lookup]
-  before_action :load_forecast, only: [:index, :lookup]
+  before_action :set_location, only: [ :index, :lookup ]
+  before_action :load_forecast, only: [ :index, :lookup ]
 
   def index
   end
@@ -36,5 +36,4 @@ class ForecastsController < ApplicationController
       @forecast = nil
     end
   end
-
 end

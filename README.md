@@ -1,6 +1,8 @@
 # iWeather
 > Rails app to get weather forecast
 
+---
+
 ### Key Features
 
 - **Rails** - Built using the latest version of Rails.
@@ -19,6 +21,8 @@
 - **Tests** - Controller, model, and system tests in Minitest.
 - **Source Code** - Source code available on GitHub.
 - **MIT License** - Open source under the MIT license.
+
+---
 
 ### Rails Commands
 

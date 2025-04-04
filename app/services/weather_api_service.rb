@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 # This class is responsible for fetching weather data from the Weather API
 class WeatherApiService < ApplicationService
   include HTTParty
-  base_uri 'api.weatherapi.com/v1'
+  base_uri "api.weatherapi.com/v1"
   format :json
 
   attr_accessor :query, :units, :options
@@ -58,7 +59,6 @@ class WeatherApiService < ApplicationService
   # Generate a cache key based on the API name, units, and query
   # @return [String] The cache key for the weather API
   def cache_key
-    ["weather_api", units, query.parameterize].join("/")
+    [ "weather_api", units, query.parameterize ].join("/")
   end
-
 end
