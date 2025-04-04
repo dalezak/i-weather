@@ -125,7 +125,10 @@ class WeatherApiParser < ApplicationParser
   end
 
   def days
-    response.dig(:forecast, :forecastday).map do |day|
+    future_days = response.dig(:forecast, :forecastday).select { |day| day[:date].to_date > Date.today }
+    return [] if future_days.blank?
+
+    future_days.map do |day|
       {
         date: day.dig(:date),
         max_temp: day.dig(:day, metric? ? :maxtemp_c : :maxtemp_f).to_s + symbol_for_field(:temperature),
