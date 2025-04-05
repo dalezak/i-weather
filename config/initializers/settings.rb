@@ -43,13 +43,13 @@ class Settings
     # Returns name for metric units
     # @return [String] The name for metric units
     def metric_name
-      units[:metric][:name]
+      units.dig(:metric, :name)
     end
 
     # Returns name for imperial units
     # @return [String] The name for imperial units
     def imperial_name
-      units[:imperial][:name]
+      units.dig(:imperial, :name)
     end
 
     # Returns the metric unit symbol
@@ -67,13 +67,13 @@ class Settings
     # Returns the metric unit label
     # @return [String] The label for metric units
     def metric_label
-      units[:metric][:label]
+      units.dig(:metric, :label)
     end
 
     # Returns the imperial unit label
     # @return [String] The label for imperial units
     def imperial_label
-      units[:imperial][:label]
+      units.dig(:imperial, :label)
     end
 
     # Returns the unit symbol for a given unit and field
@@ -82,7 +82,7 @@ class Settings
     # @return [String] The unit symbol for the given unit and field
     # @note This method fetches the unit symbol from the units configuration hash
     def units_field_symbol(unit, field)
-      units[unit][field]
+      units.dig(unit, field)
     end
   end
 end
