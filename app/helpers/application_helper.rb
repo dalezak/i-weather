@@ -1,36 +1,19 @@
 module ApplicationHelper
-  # The user's current units preference for displaying weather data.
-  # @note This method checks the cookies for the user's unit preference.
-  def units
-    cookies[:units] || Rails.configuration.x.default_units.to_s
-  end
-
-  # Is the current unit metric?
-  # @return [Boolean] true if the current unit is metric, false otherwise
-  def metric?
-    units == Rails.configuration.x.units[:metric][:name]
-  end
-
-  # Returns the label for the current unit
-  # @return [String] the label for the current unit
+  # Returns label for metric units
+  # @return [String] the label for metric units
   def metric_label
-    Rails.configuration.x.units[:metric][:label]
+    Settings.metric_label
   end
 
-  # Is the current unit imperial?
-  # @return [Boolean] true if the current unit is imperial, false otherwise
-  def imperial?
-    units == Rails.configuration.x.units[:imperial][:name]
-  end
-
-  # Returns the label for the current unit
-  # @return [String] the label for the current unit
+  # Returns label for imperial units
+  # @return [String] the label for imperial units
   def imperial_label
-    Rails.configuration.x.units[:imperial][:label]
+    Settings.imperial_label
   end
 
-  # Returns the label for the current unit
-  # @return [String] the label for the current unit
+  # Returns the appropriate class for flash messages
+  # @param level [Symbol] the flash message level (e.g., :notice, :alert, :success)
+  # @return [String] the CSS class for the flash message
   def flash_class(level)
     case level.to_sym
     when :notice

@@ -42,7 +42,7 @@ class GeocoderService < ApplicationService
   # Fetch the cache expiration time from Rails configuration
   # @return [Integer] The cache expiration time in seconds
   def expires_in
-    Rails.application.config.x.cache_expires_in || 30.minutes
+    Settings.cache_expires_in
   end
 
   def cache_key

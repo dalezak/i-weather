@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  helper_method :metric?, :imperial?
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::Base
   # @see Rails.configuration.x.default_units
   # @see Rails.configuration.x.units
   def current_units
-    @current_units ||= cookies[:units] || Rails.configuration.x.default_units.to_s
+    @current_units ||= cookies[:units] || Settings.default_units.to_s
   end
 
   # Is the current units metric?
@@ -23,7 +25,7 @@ class ApplicationController < ActionController::Base
   #   end
   # @note This method checks the current units against the metric units defined in the Rails configuration.
   def metric?
-    current_units == Rails.configuration.x.units[:metric][:name]
+    current_units == Settings.metric_name
   end
 
   # Is the current units imperial?
@@ -38,7 +40,7 @@ class ApplicationController < ActionController::Base
   #   end
   # @note This method checks the current units against the imperial units defined in the Rails configuration.
   def imperial?
-    current_units == Rails.configuration.x.units[:imperial][:name]
+    current_units == Settings.imperial_name
   end
 
   # Set the current units in the cookies.
@@ -48,15 +50,15 @@ class ApplicationController < ActionController::Base
     @current_units = cookies[:units] = units
   end
 
-  # Set the current units to metric.
+  # Set the current units to metric
   # @note This method sets the units to metric in the cookies for persistence across requests.
   def set_units_metric
-    set_units(Rails.configuration.x.units[:metric][:name])
+    set_units(Settings.metric_name)
   end
 
-  # Set the current units to imperial.
+  # Set the current units to imperial
   # @note This method sets the units to imperial in the cookies for persistence across requests.
   def set_units_imperial
-    set_units(Rails.configuration.x.units[:imperial][:name])
+    set_units(Settings.imperial_name)
   end
 end
