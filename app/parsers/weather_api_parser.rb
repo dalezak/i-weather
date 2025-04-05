@@ -10,13 +10,16 @@ class WeatherApiParser < ApplicationParser
   # @return [Forecast]
   def initialize(response, units)
     @response = response
-    @units = units.to_sym
-    @metric = units.to_sym == Rails.configuration.x.units[:metric][:name].to_sym
+    @units = units.to_s.to_sym
+    @metric = units.to_s.to_sym == Rails.configuration.x.units[:metric][:name].to_sym
   end
 
   # Parse the response and return a Forecast object
   # @return [Forecast] Returns a Forecast object with the parsed data
   def parse
+    return Forecast.new if response.blank?
+    return Forecast.new if units.blank?
+
     Forecast.new(
       updated_at: updated_at,
       cached_at: cached_at,
