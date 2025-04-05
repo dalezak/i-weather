@@ -1,19 +1,5 @@
 class Settings
   class << self
-    # Fetch value from Rails credentials
-    # @param key [Symbol] The key to fetch from credentials
-    # @return [String, nil] The value from credentials or nil if not found
-    def credentials(key)
-      Rails.application.credentials[key]
-    end
-
-    # Fetch value from Rails configuration
-    # @param key [Symbol] The key to fetch from configuration
-    # @return [String, nil] The value from configuration or nil if not found
-    def configuration(key)
-      Rails.application.config.x.public_send(key)
-    end
-
     # The Weather API key
     # @return [String, nil] The Weather API key or nil if not found
     def weather_api_key
@@ -83,6 +69,22 @@ class Settings
     # @note This method fetches the unit symbol from the units configuration hash
     def units_field_symbol(unit, field)
       units.dig(unit, field)
+    end
+
+    private
+
+    # Fetch value from Rails credentials
+    # @param key [Symbol] The key to fetch from credentials
+    # @return [String, nil] The value from credentials or nil if not found
+    def credentials(key)
+      Rails.application.credentials[key]
+    end
+
+    # Fetch value from Rails configuration
+    # @param key [Symbol] The key to fetch from configuration
+    # @return [String, nil] The value from configuration or nil if not found
+    def configuration(key)
+      Rails.application.config.x.public_send(key)
     end
   end
 end
