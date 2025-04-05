@@ -12,7 +12,7 @@ class WeatherApiService < ApplicationService
   # @param [String] query
   # @param [String] units
   # @return [Forecast]
-  def initialize(query, units, days = 5)
+  def initialize(query, units, days = 4)
     @query = query
     @units = units
     @days = days
