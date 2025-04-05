@@ -13,6 +13,12 @@ class WeatherApiParserTest < ActiveSupport::TestCase
     assert_equal forecast.valid?, false
   end
 
+  test "invalid units returns empty forecast" do
+    forecast = WeatherApiParser.parse({ current: { updated_at: Time.now.to_s } }, "abc")
+    assert_nil forecast.updated_at
+    assert_equal forecast.valid?, false
+  end
+
   test "valid response returns forecast" do
     updated_at = Time.now.to_s
     forecast = WeatherApiParser.parse({ current: { last_updated: updated_at } }, "metric")

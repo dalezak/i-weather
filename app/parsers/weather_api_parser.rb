@@ -19,6 +19,7 @@ class WeatherApiParser < ApplicationParser
   def parse
     return Forecast.new if response.blank?
     return Forecast.new if units.blank?
+    return Forecast.new unless [:metric, :imperial].include?(units)
 
     Forecast.new(
       updated_at: updated_at,
