@@ -27,11 +27,25 @@ class GeocoderService < ApplicationService
     return nil if latitude.nil?
     return nil if longitude.nil?
 
-    geocode = Geocoder.search([ latitude, longitude ]).first
-    if geocode.present? && geocode.city.present? && geocode.state.present?
-      [ geocode.city, geocode.state ].join(", ")
-    else
-      nil
+    Rails.cache.fetch(cache_key, expires_in: expires_in) do
+      geocode = Geocoder.search([ latitude, longitude ]).first
+      if geocode.present? && geocode.city.present? && geocode.state.present?
+        [ geocode.city, geocode.state ].join(", ")
+      else
+        nil
+      end
     end
+  end
+
+  private
+
+  # Fetch the cache expiration time from Rails configuration
+  # @return [Integer] The cache expiration time in seconds
+  def expires_in
+    Rails.application.config.x.cache_expires_in || 30.minutes
+  end
+
+  def cache_key
+    [ "geocoder", latitude, longitude ].join("/")
   end
 end
