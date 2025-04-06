@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :metric?, :imperial?
 
-  before_action :set_location, only: [ :index, :lookup ]
-  before_action :load_forecast, only: [ :index, :lookup ]
-
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
