@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
+# This controller handles the main pages of the application, including the home page and the about page.
+# It also manages the weather forecast functionality, allowing users to view weather information for different locations.
+
 class PagesController < ApplicationController
   before_action :set_location, only: [ :index, :forecast ]
   before_action :load_forecast, only: [ :index, :forecast ]
 
   # The home page provides a form for users to enter their location and view the weather forecast.
   # @note The forecast results are displayed using Turbo frames for a seamless experience.
-  # @note The page also handles geolocation detection using JavaScript.
-  # @note The forecast is loaded based on the user's location or the location entered in the form.
+  # @note The page also handles geolocation detection using Stimulus.
   def index
   end
 
