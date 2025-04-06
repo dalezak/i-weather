@@ -143,7 +143,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def metric?
-    units == Settings.metric_sym
+    units.to_s == Settings.metric_name
   end
 
   def field_symbol(field)

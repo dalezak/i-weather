@@ -38,18 +38,6 @@ class Settings
       units.dig(:imperial, :name)
     end
 
-    # Returns the metric unit symbol
-    # @return [Symbol] The symbol for metric units
-    def metric_sym
-      metric_name.to_sym
-    end
-
-    # Returns the imperial unit symbol
-    # @return [Symbol] The symbol for imperial units
-    def imperial_sym
-      imperial_name.to_sym
-    end
-
     # Returns the metric unit label
     # @return [String] The label for metric units
     def metric_label
