@@ -10,7 +10,7 @@ class WeatherApiParser < ApplicationParser
   # @return [Forecast]
   def initialize(response, units)
     @response = response
-    @units = units.to_s.to_sym
+    @units = units
   end
 
   # Parse the response and return a Forecast object
@@ -18,7 +18,7 @@ class WeatherApiParser < ApplicationParser
   def parse
     return Forecast.new if response.blank?
     return Forecast.new if units.blank?
-    return Forecast.new unless [ :metric, :imperial ].include?(units)
+    return Forecast.new unless %w[metric imperial].include?(units)
 
     Forecast.new(
       updated_at: updated_at,
@@ -143,7 +143,7 @@ class WeatherApiParser < ApplicationParser
   end
 
   def metric?
-    units.to_s == Settings.metric_name
+    units == Settings.metric_name
   end
 
   def field_symbol(field)

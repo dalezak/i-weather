@@ -56,7 +56,7 @@ class Settings
     # @return [String] The unit symbol for the given unit and field
     # @note This method fetches the unit symbol from the units configuration hash
     def units_field_symbol(unit, field)
-      units.dig(unit, field)
+      units.dig(unit.to_sym, field.to_sym)
     end
 
     private
