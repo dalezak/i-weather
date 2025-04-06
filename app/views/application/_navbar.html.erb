@@ -17,10 +17,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <%= button_to metric_label, metric_units_path, method: :post, class: "dropdown-item #{'active' if metric?}" %>
+              <%= button_to metric_label, metric_pages_path, method: :post, class: "dropdown-item #{'active' if metric?}" %>
             </li>
             <li>
-              <%= button_to imperial_label, imperial_units_path, method: :post, class: "dropdown-item #{'active' if imperial?}" %>
+              <%= button_to imperial_label, imperial_pages_path, method: :post, class: "dropdown-item #{'active' if imperial?}" %>
             </li>
           </ul>
         </li>

@@ -1,20 +1,10 @@
 Rails.application.routes.draw do
-  resources :pages, only: [], path: "" do
+  resources :pages, only: [ :index ], path: "" do
     collection do
       get :about
-    end
-  end
-
-  resources :units, only: [] do
-    collection do
+      post :forecast
       post :metric
       post :imperial
-    end
-  end
-
-  resources :forecasts, only: [ :index ] do
-    collection do
-      post :lookup
     end
   end
 
@@ -29,7 +19,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "forecasts#index"
+  root "pages#index"
 
   get "*path", to: redirect("/")
 end

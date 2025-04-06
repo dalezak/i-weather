@@ -3,7 +3,7 @@
   <div class="container-fluid py-5">
     <h1 class="display-5 fw-bold">How's the weather?</h1>
     <p class="col-md-8 fs-4">Hmm, will I need an umbrella or sunscreen today...</p>
-    <%= form_tag lookup_forecasts_path, class: "mb-3", data: { geocode_target: "form", turbo_frame: 'forecast_results' } do %>
+    <%= form_tag forecast_pages_path, class: "mb-3", data: { geocode_target: "form", turbo_frame: 'forecast_results' } do %>
     <%= hidden_field_tag :latitude, "", data: { geocode_target: "latitude" } %>
     <%= hidden_field_tag :longitude, "", data: { geocode_target: "longitude" } %>
     <div class="input-group">
