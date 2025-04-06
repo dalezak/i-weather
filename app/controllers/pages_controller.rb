@@ -53,7 +53,7 @@ class PagesController < ApplicationController
   # @note Redirects to the root path after setting the units.
   def metric
     set_units_metric
-    flash[:notice] = "Your units have been set to metric, so you'll see celsius, km/h, etc"
+    flash[:notice] = "Your units have been set to metric, so you'll see Celsius°, km/h, etc"
     redirect_to root_path
   end
 
@@ -61,7 +61,7 @@ class PagesController < ApplicationController
   # @note Redirects to the root path after setting the units.
   def imperial
     set_units_imperial
-    flash[:notice] = "Your units have been set to imperial, so you'll see fahrenheit, mph, etc"
+    flash[:notice] = "Your units have been set to imperial, so you'll see Fahrenheit°, mph, etc"
     redirect_to root_path
   end
 
