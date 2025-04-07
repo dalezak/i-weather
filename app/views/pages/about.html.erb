@@ -1,13 +1,14 @@
 <div class="card mb-5">
   <div class="card-body">
     <h1 class="card-title">About</h1>
-    <% @description.each do |desc| %>
     <p class="card-text">
-      <%= desc %>
+      <%= page_description %>
     </p>
-    <% end %>
     <p class="card-text">
-      You can view the source code for the project at <%= link_to @website, @website, target: '_blank' %>.
+      It is built using Ruby on Rails and utilizes various modern web technologies to deliver a seamless user experience.
+    </p>
+    <p class="card-text">
+      You can view the source code for the project at <%= link_to site_source, site_source, target: '_blank' %>.
     </p>
   </div>
 </div>

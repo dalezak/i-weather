@@ -1,20 +1,44 @@
 module ApplicationHelper
+  # Returns the site title
+  # @return [String] the site title
+  def site_title
+    Settings.site_title
+  end
+
+  # Returns the site description
+  # @return [String] the site description
+  def site_description
+    Settings.site_description
+  end
+
+  # Returns the site URL
+  # @return [String] the site URL
+  def site_url
+    Settings.site_url
+  end
+
+  # Returns the site source code URL
+  # @return [String] the site source code URL
+  def site_source
+    Settings.site_source
+  end
+
   # Returns the page or site title
   # @return [String] the page or site title
   def page_title
-    content_for(:title) || Settings.site_title
+    content_for(:title) || site_title
   end
 
   # Returns the page or site description
   # @return [String] the page or site description
   def page_description
-    content_for(:description) || Settings.site_description
+    content_for(:description) || site_description
   end
 
   # Returns the page or site URL
   # @return [String] the page or site URL
   def page_url
-    content_for(:url) || Settings.site_url
+    content_for(:url) || site_url
   end
 
   # Returns label for metric units

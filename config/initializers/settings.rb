@@ -18,6 +18,12 @@ class Settings
       configuration(:site_url)
     end
 
+    # The website source code URL
+    # @return [String] The website source code URL
+    def site_source
+      configuration(:site_source)
+    end
+
     # The Weather API key
     # @return [String, nil] The Weather API key or nil if not found
     def weather_api_key

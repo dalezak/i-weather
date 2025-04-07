@@ -16,11 +16,6 @@ class PagesController < ApplicationController
   # The about provides information about the application, its features, and the technologies used.
   # @note The about page includes a description, website link, and a list of features.
   def about
-    @website = "https://github.com/dalezak/i-weather"
-    @description = [
-      "iWeather is a simple weather application that provides current weather information and forecasts for any location.",
-      "It is built using Ruby on Rails and utilizes various modern web technologies to deliver a seamless user experience."
-    ]
     @features = {
       "Rails" => "Built using the latest version of Rails.",
       "Hotwire" => "Forecast displayed using Hotwire's turbo-frames.",
