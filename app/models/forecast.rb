@@ -5,6 +5,8 @@ class Forecast
   include ActiveModel::Model
   include ActiveModel::Attributes
 
+  # Mapping of field names to their corresponding attributes
+  # This mapping is used to convert the field names from the API response to the attributes in the model
   FIELDS = {
     "Current" => :icon,
     "Condition" => :condition,
