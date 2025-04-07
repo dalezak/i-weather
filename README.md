@@ -54,6 +54,9 @@ Run Tests
 ```shell
 rails test
 ```
+```shell
+rails test:system
+```
 
 Build Assets
 ```shell
