@@ -41,3 +41,6 @@
 #VS Code
 *.code-workspace
 /config/credentials/production.key
+
+#Apple
+.DS_Store

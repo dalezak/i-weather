@@ -36,7 +36,11 @@ module IWeather
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.x.site_title = "iWeather"
+    config.x.site_description = "Rails app to get weather forecast"
+    config.x.site_url = "https://i-weather-7eb16de19b89.herokuapp.com"
     config.x.cache_expires_in = Rails.env.production? ? 30.minutes : 1.minute
+    config.x.default_units = :metric
     config.x.units = {
       metric: {
         name: "metric",
@@ -77,6 +81,5 @@ module IWeather
         heat_index: "°F"
       }
     }
-    config.x.default_units = :metric
   end
 end

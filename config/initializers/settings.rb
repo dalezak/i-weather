@@ -1,5 +1,23 @@
 class Settings
   class << self
+    # The website title
+    # @return [String] The website title
+    def site_title
+      configuration(:site_title)
+    end
+
+    # The website description
+    # @return [String] The website description
+    def site_description
+      configuration(:site_description)
+    end
+
+    # The website URL
+    # @return [String] The website URL
+    def site_url
+      configuration(:site_url)
+    end
+
     # The Weather API key
     # @return [String, nil] The Weather API key or nil if not found
     def weather_api_key
