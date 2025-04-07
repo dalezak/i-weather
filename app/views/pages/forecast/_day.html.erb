@@ -4,8 +4,16 @@
       <h6><%= format_date(day[:date]) %></h6>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><%= day[:condition] %></li>
-      <li class="list-group-item"><%= day[:min_temp] %> / <%= day[:max_temp] %></li>
+      <li class="list-group-item">
+        <p class="fs-5 my-2">
+          <%= day[:condition] %>
+        </p>
+      </li>
+      <li class="list-group-item">
+        <p class="fs-5 my-2">
+          <%= day[:min_temp] %> / <%= day[:max_temp] %>
+        </p>
+      </li>
     </ul>
   </div>
 </div>

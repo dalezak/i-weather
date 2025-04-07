@@ -50,9 +50,14 @@ Rails Routes
 rails routes
 ```
 
-Rails Tests
+Run Tests
 ```shell
 rails test
+```
+
+Build Assets
+```shell
+yarn run build:css
 ```
 
 Rubocop Warnings

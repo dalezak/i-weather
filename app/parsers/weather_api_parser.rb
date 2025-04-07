@@ -23,9 +23,6 @@ class WeatherApiParser < ApplicationParser
     Forecast.new(
       updated_at: updated_at,
       cached_at: cached_at,
-      location_name: location_name,
-      location_region: location_region,
-      location_country: location_country,
       icon: icon,
       condition: condition,
       temperature: temperature,
@@ -53,18 +50,6 @@ class WeatherApiParser < ApplicationParser
 
   def cached_at
     Time.current
-  end
-
-  def location_name
-    response.dig(:location, :name)
-  end
-
-  def location_region
-    response.dig(:location, :region)
-  end
-
-  def location_country
-    response.dig(:location, :country)
   end
 
   def icon

@@ -59,11 +59,19 @@ module ApplicationHelper
   # @note If the value is blank, returns "n/a". If the label is 'Updated' or 'Cached', returns a time ago string.
   def field_value(label, value)
     if value.blank?
-      "n/a"
-    elsif [ "Updated", "Cached" ].include?(label)
-      time_ago_in_words(value) + " ago"
+      content_tag(:p, class: "fs-5 my-2") do
+        "n/a"
+      end
+    elsif label == "Current"
+      image_tag(value, alt: "Weather Icon", class: "img-icon")
+    elsif %w[Updated Cached].include?(label)
+      content_tag(:p, class: "fs-5 my-2") do
+        time_ago_in_words(value) + " ago"
+      end
     else
-      value
+      content_tag(:p, class: "fs-5 my-2") do
+        value
+      end
     end
   end
 

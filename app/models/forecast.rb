@@ -6,6 +6,7 @@ class Forecast
   include ActiveModel::Attributes
 
   FIELDS = {
+    "Current" => :icon,
     "Condition" => :condition,
     "Temperature" => :temperature,
     "Feels Like" => :feels_like,
@@ -15,7 +16,6 @@ class Forecast
     "Visibility" => :visibility,
     "UV Index" => :uv_index,
     "Heat Index" => :heat_index,
-    "Dew Point" => :dew_point,
     "Cloud Cover" => :cloud_cover,
     "Gust Speed" => :gust_speed,
     "Humidity" => :humidity,
@@ -26,10 +26,6 @@ class Forecast
 
   attribute :updated_at, :datetime
   attribute :cached_at, :datetime
-
-  attribute :location_name, :string
-  attribute :location_region, :string
-  attribute :location_country, :string
 
   attribute :icon, :string
   attribute :condition, :string
