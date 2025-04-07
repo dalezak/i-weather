@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class ForecastsTest < ApplicationSystemTestCase
+class PagesTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit pages_url
     fill_in :location, with: "Saskatoon"
