@@ -3,10 +3,19 @@
 
 <head>
   <title><%= content_for(:title) || "iWeather" %></title>
+  <meta name="description" content="Rails app to get weather forecast">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="iWeather">
+  <meta property="og:title" content="iWeather">
+  <meta property="og:description" content="Rails app to get weather forecast">
+  <meta property="og:url" content="https://i-weather-7eb16de19b89.herokuapp.com">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
+
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
