@@ -117,13 +117,13 @@ class WeatherApiParser < ApplicationParser
     return [] if forecast_days.blank?
 
     forecast_days.map do |day|
-      {
+      Day.new(
         date: day.dig(:date),
         max_temp: day.dig(:day, metric? ? :maxtemp_c : :maxtemp_f).to_s + field_symbol(:temperature),
         min_temp: day.dig(:day, metric? ? :mintemp_c : :mintemp_f).to_s + field_symbol(:temperature),
         condition: day.dig(:day, :condition, :text),
         icon: day.dig(:day, :condition, :icon)
-      }
+      )
     end
   end
 
