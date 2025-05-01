@@ -24,16 +24,40 @@ class Settings
       configuration(:site_source)
     end
 
+    # The list of countries supported by the application
+    # @return [Array<Hash>] The list of countries with their names and codes
+    def countries
+      configuration(:countries)
+    end
+
+    # The priority list of forecast services to try
+    # @return [Array<String>] The forecast services to use
+    def forecast_services
+      configuration(:forecast_services)
+    end
+
     # The Weather API key
     # @return [String, nil] The Weather API key or nil if not found
     def weather_api_key
       credentials(:weather_api_key)
     end
 
+    # The Weather Stack key
+    # @return [String, nil] The Weather Stack key or nil if not found
+    def weather_stack_key
+      credentials(:weather_stack_key)
+    end
+
     # The cache expires_in time
     # @return [Integer] The cache expiration timexw
     def cache_expires_in
       configuration(:cache_expires_in)
+    end
+
+    # The forecast refresh time
+    # @return [Integer] The forecast refresh time
+    def forecast_refresh_in
+      configuration(:forecast_refresh_in)
     end
 
     # The default units for the application

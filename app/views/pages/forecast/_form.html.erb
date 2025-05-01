@@ -7,7 +7,7 @@
     <%= hidden_field_tag :latitude, "", data: { geocode_target: "latitude" } %>
     <%= hidden_field_tag :longitude, "", data: { geocode_target: "longitude" } %>
     <div class="input-group">
-      <%= text_field_tag :location, location, class: "form-control form-control-lg", placeholder: "Enter your city or postal code", data: { geocode_target: "address" } %>
+      <%= text_field_tag :location, location, class: "form-control form-control-lg", placeholder: "Enter your location...", data: { geocode_target: "address" } %>
       <button class="btn btn-outline-primary" type="button" id="locate" title="Locate me" data-action="click->geocode#locate">
         <i class="bi bi-geo-alt"></i>
       </button>

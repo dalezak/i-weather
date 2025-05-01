@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DayTest < ActiveSupport::TestCase
+class RefreshForecastJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,3 +1,4 @@
+<% day_presenter = DayPresenter.new(day) %>
 <div class="col">
   <div class="card mb-4">
     <div class="card-header">
@@ -6,12 +7,12 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         <p class="fs-5 my-2">
-          <%= day.condition %>
+          <%= day_presenter.condition %>
         </p>
       </li>
       <li class="list-group-item">
         <p class="fs-5 my-2">
-          <%= day.min_temp %> / <%= day.max_temp %>
+          <%= day_presenter.min_temp %> / <%= day_presenter.max_temp %>
         </p>
       </li>
     </ul>

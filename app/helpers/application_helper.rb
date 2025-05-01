@@ -87,14 +87,14 @@ module ApplicationHelper
         "n/a"
       end
     elsif label == "Current"
-      image_tag(value, alt: "Weather Icon", class: "img-icon")
+      image_tag(value, alt: "Weather Icon", class: "img-icon") unless value.blank?
     elsif %w[Updated Cached].include?(label)
       content_tag(:p, class: "fs-5 my-2") do
         time_ago_in_words(value) + " ago"
       end
     else
       content_tag(:p, class: "fs-5 my-2") do
-        value
+        value.to_s
       end
     end
   end

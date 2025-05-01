@@ -1,12 +1,7 @@
-class Day
-  include ActiveModel::Model
-  include ActiveModel::Attributes
+# This model is used to represent a single day's weather data.
+class Day < ApplicationRecord
+  belongs_to :forecast, counter_cache: :days_count
 
-  attribute :date, :string
-  attribute :max_temp, :string
-  attribute :min_temp, :string
-  attribute :condition, :string
-  attribute :icon, :string
-
+  validates :forecast_id, presence: true
   validates :date, presence: true
 end

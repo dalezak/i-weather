@@ -40,6 +40,8 @@ gem "httparty"
 
 gem "geocoder"
 
+gem "city-state"
+
 gem "rack-attack"
 
 group :development, :test do

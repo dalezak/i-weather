@@ -41,7 +41,13 @@ module IWeather
     config.x.site_url = "https://i-weather-7eb16de19b89.herokuapp.com"
     config.x.site_source = "https://github.com/dalezak/i-weather"
     config.x.cache_expires_in = Rails.env.production? ? 30.minutes : 1.minute
+    config.x.forecast_refresh_in = Rails.env.production? ? 30.minutes : 1.minute
     config.x.default_units = :metric
+    config.x.forecast_services = %w[WeatherApi::Service WeatherStack::Service]
+    config.x.countries = [
+      { name: "United States", code: :US },
+      { name: "Canada", code: :CA }
+    ]
     config.x.units = {
       metric: {
         name: "metric",
@@ -57,7 +63,7 @@ module IWeather
         feels_like: "°C",
         wind_degree: "°",
         wind_speed: "km/h",
-        wind_direction: "°",
+        wind_direction: "",
         gust_speed: "km/h",
         cloud_cover: "%",
         heat_index: "°C"
@@ -76,7 +82,7 @@ module IWeather
         feels_like: "°F",
         wind_degree: "°",
         wind_speed: "mph",
-        wind_direction: "°",
+        wind_direction: "",
         gust_speed: "mph",
         cloud_cover: "%",
         heat_index: "°F"

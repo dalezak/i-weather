@@ -4,7 +4,8 @@
 # It also manages the weather forecast functionality, allowing users to view weather information for different locations.
 
 class PagesController < ApplicationController
-  before_action :set_location, only: [ :index, :forecast ]
+  before_action :load_location, only: [ :index, :forecast ]
+  before_action :load_city, only: [ :index, :forecast ]
   before_action :load_forecast, only: [ :index, :forecast ]
 
   # The home page provides a form for users to enter their location and view the weather forecast.
@@ -64,13 +65,13 @@ class PagesController < ApplicationController
 
   # Sets the location based on parameters or cookies.
   # @note This method checks for latitude and longitude parameters, a location parameter, or a location stored in cookies.
-  def set_location
+  def load_location
     if params[:latitude].present? && params[:longitude].present?
-      @location = GeocoderService.new(params[:latitude], params[:longitude]).call
-      cookies[:location] = @location
+      latitude = params[:latitude].to_f
+      longitude = params[:longitude].to_f
+      @location = cookies[:location] = GeoLocation::Service.new(latitude, longitude).call
     elsif params[:location].present?
-      @location = params[:location]
-      cookies[:location] = @location
+      @location = cookies[:location] = params[:location]
     elsif cookies[:location].present?
       @location = cookies[:location]
     else
@@ -78,11 +79,30 @@ class PagesController < ApplicationController
     end
   end
 
-  # Loads the weather forecast based on the location.
-  # @note This method calls the WeatherApiService to fetch the forecast data.
+  # Loads the city based on the location string.
+  # @note This method splits the location string into city and region components.
+  # It uses the city name and region to find or create a city record in the database.
+  # @return [City, nil] Returns the city object or nil if no location is specified.
+  # @note The city is created if it does not exist in the database.
+  # @note The city name and region are stripped of leading and trailing whitespace.
+  def load_city
+    if @location.present? && @location.include?(",")
+      name, region = @location.split(",").map(&:strip)
+      @city = City.find_or_create_by(name: name, region: region)
+    else
+      @city = nil
+    end
+  end
+
+  # Loads the forecast data for the specified city.
+  # @note This method checks if the city is present and retrieves the forecast data from the database.
+  # If the forecast data is stale, it refreshes the data from the weather API.
+  # @return [Forecast, nil] Returns the forecast object or nil if no city is specified.
+  # @note The forecast data is cached for performance.
   def load_forecast
-    if @location.present?
-      @forecast = WeatherApiService.call(@location, current_units)
+    if @city.present?
+      @forecast = Forecast.find_or_create_by(city: @city, units: current_units)
+      @forecast.refresh! if @forecast.refresh?
     else
       @forecast = nil
     end

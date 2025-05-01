@@ -6,8 +6,8 @@
 </div>
 <% elsif forecast.valid? %>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-  <% Forecast::FIELDS.each do |label, field| %>
-  <%= render 'pages/forecast/field', label: label, value: forecast.public_send(field) %>
+  <% ForecastPresenter.new(forecast).fields.each do |label, value| %>
+  <%= render 'pages/forecast/field', label: label, value: value %>
   <% end %>
   <% forecast.days.each do |day| %>
   <%= render 'pages/forecast/day', day: day %>

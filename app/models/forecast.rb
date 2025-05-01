@@ -1,58 +1,54 @@
 # frozen_string_literal: true
 
 # This class represents a weather forecast
-class Forecast
-  include ActiveModel::Model
-  include ActiveModel::Attributes
+class Forecast < ApplicationRecord
+  belongs_to :city, counter_cache: :forecasts_count
 
-  # Mapping of field names to their corresponding attributes
-  # This mapping is used to convert the field names from the API response to the attributes in the model
-  FIELDS = {
-    "Current" => :icon,
-    "Condition" => :condition,
-    "Temperature" => :temperature,
-    "Feels Like" => :feels_like,
-    "Wind Speed" => :wind_speed,
-    "Wind Direction" => :wind_direction,
-    "Pressure" => :pressure,
-    "Visibility" => :visibility,
-    "UV Index" => :uv_index,
-    "Heat Index" => :heat_index,
-    "Cloud Cover" => :cloud_cover,
-    "Gust Speed" => :gust_speed,
-    "Humidity" => :humidity,
-    "Precipitation" => :precipitation,
-    "Updated" => :updated_at,
-    "Cached" => :cached_at
-  }.freeze
+  has_many :days, dependent: :destroy
 
-  attribute :updated_at, :datetime
-  attribute :cached_at, :datetime
+  validates :city_id, presence: true
 
-  attribute :icon, :string
-  attribute :condition, :string
+  scope :for_city, ->(city) { joins(:city).where(cities: { name: city }) if city.present? }
+  scope :for_region, ->(region) { joins(:city).where(cities: { region: region }) if region.present? }
 
-  attribute :temperature, :string
-  attribute :feels_like, :string
+  def cached_at
+    Time.now
+  end
 
-  attribute :wind_speed, :string
-  attribute :wind_direction, :string
+  def refresh?
+    condition.blank? || updated_at < Settings.forecast_refresh_in.ago
+  end
 
-  attribute :pressure, :string
-  attribute :visibility, :string
+  def refresh!
+    Settings.forecast_services.each do |service_name|
+      service_class = service_name.camelize.constantize
+      service_instance = service_class.new(city.name, city.region, units)
+      attributes = service_instance.call
+      if attributes.present?
+        attributes.each do |key, value|
+          if key == :days
+            refresh_days(value)
+          elsif self.respond_to?(key)
+            self[key] = value
+          end
+        end
+        self.save
+        break
+      end
+    end
+    self.reload
+  end
 
-  attribute :uv_index, :string
-  attribute :heat_index, :string
+  private
 
-  attribute :dew_point, :string
-  attribute :cloud_cover, :string
-
-  attribute :gust_speed, :string
-
-  attribute :humidity, :string
-  attribute :precipitation, :string
-
-  attribute :days, array: true, default: []
-
-  validates :updated_at, presence: true
+  def refresh_days(days_data)
+    if days_data.present?
+      days_data.each do |day_data|
+        day = days.find_or_create_by(date: day_data[:date], units: units)
+        day.update(day_data)
+      end
+    else
+      days.destroy_all
+    end
+  end
 end

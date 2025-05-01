@@ -13,7 +13,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should post forecast for location" do
-    post forecast_pages_url, params: { location: "Saskatoon" }
+    post forecast_pages_url, params: { location: "Saskatoon, Saskatchewan" }
     assert_response :success
   end
 
