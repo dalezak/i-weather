@@ -11,7 +11,6 @@ class City < ApplicationRecord
         cities = CS.cities(state_code, country[:code])
         cities.each do |city_name|
           city = City.find_or_create_by!(
-            country: country[:name],
             region: state_name,
             name: city_name)
           puts city.inspect
