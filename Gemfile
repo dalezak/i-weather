@@ -44,6 +44,7 @@ gem "city-state"
 
 gem "rack-attack"
 
+gem "redis", "~> 4.0"
 gem "sidekiq"
 
 group :development, :test do
