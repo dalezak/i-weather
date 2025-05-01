@@ -18,14 +18,14 @@ class GeoLocation::Service < ApplicationService
     return nil if latitude.nil?
     return nil if longitude.nil?
 
-    # Rails.cache.fetch(cache_key, expires_in: expires_in) do
+    Rails.cache.fetch(cache_key, expires_in: expires_in) do
       geocode = Geocoder.search([ latitude, longitude ]).first
       if geocode.present? && geocode.city.present? && geocode.state.present?
         [ geocode.city, geocode.state ].join(", ")
       else
         nil
       end
-    # end
+    end
   end
 
   private

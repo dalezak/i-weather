@@ -44,11 +44,20 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Replace the default in-process memory cache store with a durable alternative.
-  config.cache_store = :solid_cache_store
+  # config.cache_store = :solid_cache_store
+  config.cache_store = :redis_cache_store, {
+    url: ENV["REDIS_URL"],
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
+    connect_timeout: 30, # Defaults to 20 seconds
+    read_timeout: 1, # Defaults to 1 second
+    write_timeout: 1, # Defaults to 1 second
+    reconnect_attempts: 1 # Defaults to 0
+  }
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
-  config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  # config.active_job.queue_adapter = :solid_queue
+  # config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.active_job.queue_adapter = :sidekiq
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
