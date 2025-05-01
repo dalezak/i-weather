@@ -66,17 +66,19 @@ class PagesController < ApplicationController
   # Sets the location based on parameters or cookies.
   # @note This method checks for latitude and longitude parameters, a location parameter, or a location stored in cookies.
   def load_location
-    if params[:latitude].present? && params[:longitude].present?
-      latitude = params[:latitude].to_f
-      longitude = params[:longitude].to_f
-      @location = cookies[:location] = GeoLocation::Service.new(latitude, longitude).call
+    @location = if params[:latitude].present? && params[:longitude].present?
+                  cookies[:location] = GeoLocation::Service.new(latitude: params[:latitude].to_f, longitude: params[:longitude].to_f).call
     elsif params[:location].present?
-      @location = cookies[:location] = params[:location]
+                  cookies[:location] = resolve_location(params[:location])
     elsif cookies[:location].present?
-      @location = cookies[:location]
-    else
-      @location = nil
+                  cookies[:location] = resolve_location(cookies[:location])
     end
+  end
+
+  # Resolves the location string to a valid format.
+  # @note This method checks if the location string contains a comma.
+  def resolve_location(location)
+    location.include?(",") ? location.strip : GeoLocation::Service.new(query: location).call
   end
 
   # Loads the city based on the location string.
