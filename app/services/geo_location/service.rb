@@ -17,8 +17,7 @@ class GeoLocation::Service < ApplicationService
   # Fetch the city and state from the geocode API
   # @return [String, nil] Returns a string with the city and state or nil if the latitude or longitude is nil
   def call
-    search = query if query.present?
-    search ||= [ latitude, longitude ].join(", ")
+    search = query.presence || [ latitude, longitude ].compact.join(", ").presence
     return nil if search.blank?
 
     Rails.cache.fetch(cache_key, expires_in: expires_in) do
