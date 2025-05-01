@@ -26,11 +26,11 @@ class WeatherApi::Service < ApplicationService
   def call
     return nil if options.blank?
 
-    Rails.cache.fetch(cache_key, expires_in: expires_in) do
+    # Rails.cache.fetch(cache_key, expires_in: expires_in) do
       response = self.class.get("/v1/forecast.json", options)
       data = response.parsed_response.with_indifferent_access
       WeatherApi::Parser.parse(data, units)
-    end
+    # end
   end
 
   private
