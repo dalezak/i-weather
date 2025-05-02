@@ -4,6 +4,8 @@ class City < ApplicationRecord
   validates :name, presence: true
   validates :region, presence: true
 
+  # This method imports cities from the CS gem based on the countries defined in the Settings.
+  # It iterates through each country, retrieves the states and cities, and creates city records in the database.
   def self.import
     Settings.countries.each do |country|
       states = CS.states(country[:code])

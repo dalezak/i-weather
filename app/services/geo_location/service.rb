@@ -38,7 +38,9 @@ class GeoLocation::Service < ApplicationService
     Settings.cache_expires_in
   end
 
+  # Generate a cache key based on the API name, latitude, longitude, and query
+  # @return [String] The cache key for the geocode API
   def cache_key
-    [ "geo_location", latitude, longitude, query.to_s.parameterize ].compact.join("/")
+    get_cache_key("geo_location", latitude, longitude, query)
   end
 end

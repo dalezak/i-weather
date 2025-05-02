@@ -40,8 +40,8 @@ module IWeather
     config.x.site_description = "iWeather is a simple weather application that provides the current weather forecast for any location."
     config.x.site_url = "https://i-weather-7eb16de19b89.herokuapp.com"
     config.x.site_source = "https://github.com/dalezak/i-weather"
-    config.x.cache_expires_in = Rails.env.production? ? 30.minutes : 1.minute
-    config.x.forecast_refresh_in = Rails.env.production? ? 30.minutes : 1.minute
+    config.x.cache_expires_in = Rails.env.production? ? 30.minutes : 5.minutes
+    config.x.forecast_refresh_in = Rails.env.production? ? 30.minutes : 5.minutes
     config.x.default_units = :metric
     config.x.forecast_services = %w[WeatherApi::Service WeatherStack::Service]
     config.x.countries = [

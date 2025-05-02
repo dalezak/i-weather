@@ -12,7 +12,7 @@
 - **Stimulus** - Geocoder location detection using Stimulus.
 - **Bootstrap** - Responsive design using Bootstrap.
 - **Geolocation** - Address lookup using Geocoder.
-- **APIs** - Weather data from Weather API.
+- **APIs** - Weather data from Weather API and Weather Stack.
 - **Measurements** - Supports both metric and imperial units.
 - **Cookies** - Cookies for storing user preferences.
 - **Caching** - Forecast caching for performance.

@@ -50,9 +50,9 @@ class WeatherApi::Service < ApplicationService
     Settings.cache_expires_in
   end
 
-  # Generate a cache key based on the API name, units, and location
+  # Generate a cache key based on the API name, units, region, city, and days
   # @return [String] The cache key for the weather API
   def cache_key
-    [ "weather_api", units.to_s.parameterize, region.to_s.parameterize, city.to_s.parameterize, days ].compact.join("/")
+    get_cache_key("weather_api", units, region, city, days)
   end
 end

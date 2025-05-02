@@ -10,4 +10,11 @@ class ApplicationService
   def self.call(*args, &block)
     new(*args.first, &block).call
   end
+
+  # This method generates a cache key based on the provided arguments.
+  # It converts each argument to a string, parameterizes it, and joins them with slashes.
+  # @param [Array] args The arguments to generate the cache key from.
+  def get_cache_key(*args)
+    args.compact.map(&:to_s).map(&:parameterize).join("/")
+  end
 end

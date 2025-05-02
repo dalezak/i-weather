@@ -27,6 +27,8 @@ class ForecastPresenter < ApplicationPresenter
     @units = forecast.units || Settings.default_units
   end
 
+  # Forecast fields to be displayed
+  # @return [Hash] a hash containing the field names and their corresponding values
   def fields
     @fields ||= FIELDS.each_with_object({}) do |(label, field), result|
       value = forecast.send(field)

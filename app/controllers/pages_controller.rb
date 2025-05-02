@@ -23,7 +23,7 @@ class PagesController < ApplicationController
       "Stimulus" => "Geocoder location detection using Stimulus.",
       "Bootstrap" => "Responsive design using Bootstrap.",
       "Geolocation" => "Address lookup using Geocoder.",
-      "APIs" => "Weather data from Weather API.",
+      "APIs" => "Weather data from Weather API and Weather Stack.",
       "Measurements" => "Supports both metric and imperial units.",
       "Cookies" => "Cookies for storing user preferences.",
       "Caching" => "Forecast caching for performance.",
@@ -67,11 +67,11 @@ class PagesController < ApplicationController
   # @note This method checks for latitude and longitude parameters, a location parameter, or a location stored in cookies.
   def load_location
     @location = if params[:latitude].present? && params[:longitude].present?
-                  cookies[:location] = GeoLocation::Service.new(latitude: params[:latitude].to_f, longitude: params[:longitude].to_f).call
+      cookies[:location] = GeoLocation::Service.new(latitude: params[:latitude].to_f, longitude: params[:longitude].to_f).call
     elsif params[:location].present?
-                  cookies[:location] = resolve_location(params[:location])
+      cookies[:location] = resolve_location(params[:location])
     elsif cookies[:location].present?
-                  cookies[:location] = resolve_location(cookies[:location])
+      cookies[:location] = resolve_location(cookies[:location])
     end
   end
 

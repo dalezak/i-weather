@@ -36,8 +36,8 @@ class WeatherApi::Parser < ApplicationParser
       gust_speed: gust_speed,
       humidity: humidity,
       precipitation: precipitation,
-      days: days,
-      fetched_at: last_updated
+      fetched_at: last_updated,
+      days: days
     }
   end
 
@@ -119,9 +119,9 @@ class WeatherApi::Parser < ApplicationParser
         max_temp: day.dig(:day, metric? ? :maxtemp_c : :maxtemp_f),
         min_temp: day.dig(:day, metric? ? :mintemp_c : :mintemp_f),
         max_wind: day.dig(:day, metric? ? :maxwind_kph : :maxwind_mph),
+        avg_humidity: day.dig(:day, :avghumidity),
         avg_temp: day.dig(:day, metric? ? :avgtemp_c : :avgtemp_f),
         avg_visibility: day.dig(:day, metric? ? :avgvis_km : :avgvis_miles),
-        avg_humidity: day.dig(:day, :avghumidity),
         total_precipitation: day.dig(:day, metric? ? :totalprecip_mm : :totalprecip_in)
     }
     end
