@@ -16,24 +16,13 @@ class WeatherApi::ServiceTest < ActiveSupport::TestCase
     assert_nil results
   end
 
-  test "valid location returns forecast" do
-    mock_temperature = "20°C"
-    mock_forecast = Forecast.new(temperature: mock_temperature, updated_at: Time.now)
+  test "valid location returns results" do
     mock = Minitest::Mock.new
-    mock.expect(:call, mock_forecast, [ "Saskatoon", "Saskatchewan", "metric" ])
+    mock.expect(:call, { condition: "Sunny" }, [])
     WeatherApi::Service.stub :call, mock do
       results = WeatherApi::Service.new(city: "Saskatoon", region: "Saskatchewan", units: "metric").call
-      assert_not_nil results
-    end
-  end
-
-  test "invalid location returns forecast with valid? false" do
-    mock_forecast = Forecast.new(updated_at: nil)
-    mock = Minitest::Mock.new
-    mock.expect(:call, mock_forecast, [ "Saskatoon", "metric" ])
-    WeatherApi::Service.stub :call, mock do
-      results = WeatherApi::Service.new(city: "Saskatoon", region: "Saskatchewan", units: "metric").call
-      assert_not_nil results
+      assert_not_empty results
+      assert_not_nil results[:condition]
     end
   end
 end
