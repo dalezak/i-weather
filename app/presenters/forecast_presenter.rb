@@ -22,9 +22,9 @@ class ForecastPresenter < ApplicationPresenter
     "Cached" => :cached_at
   }.freeze
 
-  def initialize(forecast, units = nil)
+  def initialize(forecast)
     @forecast = forecast
-    @units = units || Settings.default_units
+    @units = forecast.units || Settings.default_units
   end
 
   def fields

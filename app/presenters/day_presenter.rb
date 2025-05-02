@@ -1,9 +1,9 @@
 class DayPresenter < ApplicationPresenter
   attr_reader :day, :units
 
-  def initialize(day, units = nil)
+  def initialize(day)
     @day = day
-    @units = units || Settings.default_units
+    @units = day.units || Settings.default_units
   end
 
   def date
