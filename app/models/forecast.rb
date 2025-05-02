@@ -22,7 +22,7 @@ class Forecast < ApplicationRecord
   def refresh!
     Settings.forecast_services.each do |service_name|
       service_class = service_name.camelize.constantize
-      service_instance = service_class.new(city.name, city.region, units)
+      service_instance = service_class.new(city: city.name, region: city.region, units: units)
       attributes = service_instance.call
       if attributes.present?
         attributes.each do |key, value|

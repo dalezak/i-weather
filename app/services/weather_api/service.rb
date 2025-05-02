@@ -11,9 +11,9 @@ class WeatherApi::Service < ApplicationService
   # Initialize with city, region and days
   # @param [String] city
   # @param [String] region
-  # @param [String] days
-  # @return [Hash]
-  def initialize(city, region, units, days = 4)
+  # @param [String] units
+  # @param [Integer] days
+  def initialize(city:, region:, units:, days: 4)
     @city = city
     @region = region
     @units = units
@@ -22,9 +22,12 @@ class WeatherApi::Service < ApplicationService
   end
 
   # Fetch weather data from the API
-  # @return [Forecast, nil] Returns a Forecast object or nil if the location is blank or units are invalid
+  # @return [Hash, nil] Returns a Forecast object or nil if the location is blank or units are invalid
   def call
-    return nil if options.blank?
+    return nil if city.blank?
+    return nil if region.blank?
+    return nil if units.blank?
+    return nil if [ "metric", "imperial" ].exclude?(units)
 
     Rails.cache.fetch(cache_key, expires_in: expires_in) do
       response = self.class.get("/v1/forecast.json", options)

@@ -8,6 +8,6 @@ class ApplicationService
 
   # This method allows you to call the service object directly without needing to create an instance first.
   def self.call(*args, &block)
-    new(*args, &block).call
+    new(*args.first, &block).call
   end
 end
