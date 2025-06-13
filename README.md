@@ -1,8 +1,6 @@
 # iWeather
 ### Rails app to get weather forecast
 
-[https://i-weather-7eb16de19b89.herokuapp.com](https://i-weather-7eb16de19b89.herokuapp.com)
-
 ---
 
 ### Key Features
